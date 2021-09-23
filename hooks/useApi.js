@@ -11,23 +11,15 @@ export default function useApi (url, options = {}, dependencies = [], runOnMount
   const [loading, setLoading] = useState(false)
   const firstUpdate = useRef(!runOnMount)
 
-  function wait (delay) {
-    return new Promise(function (resolve) {
-      setTimeout(resolve, delay)
-    })
-  }
-
   const refetch = (route, newOptions = {}) => {
     const urlRoute = `${url}/${route}`
     setLoading(true)
-    wait(1000).then(() => {
-      fetch(urlRoute, { ...DEFAULT_OPTIONS, ...options, ...newOptions })
-        .then(res => res.json())
-        .then(json => {
-          setApiResult(json)
-          setLoading(false)
-        })
-    })
+    fetch(urlRoute, { ...DEFAULT_OPTIONS, ...options, ...newOptions })
+      .then(res => res.json())
+      .then(json => {
+        setApiResult(json)
+        setLoading(false)
+      })
   }
 
   useEffect(() => {

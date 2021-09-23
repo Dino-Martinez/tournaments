@@ -4,9 +4,10 @@ import { useEffect } from 'react'
 import useApi from '../hooks/useApi'
 
 export default function Home ({ session, authenticating }) {
-  const [data, refetch, apiLoading] = useApi('/api/test')
+  const [data, refetch, apiLoading] = useApi('/api/users')
 
-  useEffect(() => { if (session) refetch() }, [session])
+  useEffect(() => { if (session) refetch(session.user.email) }, [session])
+
   return (
     <div>
       <Head>
@@ -25,8 +26,11 @@ export default function Home ({ session, authenticating }) {
         <h1>Fetching result...</h1>
       }
 
-      {!authenticating && !apiLoading && session &&
-        data.result
+      {!authenticating && !apiLoading && data &&
+        <>
+         {data.name}
+         {session.user.email}
+        </>
       }
 
       {!authenticating &&

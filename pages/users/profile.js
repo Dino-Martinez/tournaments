@@ -8,7 +8,7 @@ export default function Profile ({ session, authenticating }) {
   const [data, refetch, loading] = useApi('/api/users')
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
-  useEffect(() => { if (session) refetch(session.user.email) }, [authenticated])
+  useEffect(() => { if (authenticated) refetch(session.user.email) }, [authenticated])
 
   return (
     <>

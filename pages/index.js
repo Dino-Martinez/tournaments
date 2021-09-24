@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import SignInForm from '../components/signinForm'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import useApi from '../hooks/useApi'
+import { AuthContext } from '../hooks/useAuth'
 
-export default function Home ({ session, authenticating }) {
+export default function Home () {
+  const [session, authenticating] = useContext(AuthContext)
   const [data, refetch, apiLoading] = useApi('/api/users')
 
   useEffect(() => { if (session) refetch(session.user.email) }, [session])
@@ -34,7 +36,7 @@ export default function Home ({ session, authenticating }) {
       }
 
       {!authenticating &&
-        <SignInForm session={session}></SignInForm>
+        <SignInForm />
       }
     </div>
   )

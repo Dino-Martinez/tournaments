@@ -1,6 +1,10 @@
 import Link from 'next/link'
+import { useContext } from 'react'
+import { AuthContext } from '../hooks/useAuth'
 
-export default function Layout ({ children, session }) {
+export default function Layout ({ children }) {
+  const [session] = useContext(AuthContext)
+
   return (
     <>
       <nav>

@@ -8,7 +8,7 @@ export default async function handler (req, res) {
   if (req.method === 'GET') {
     const tournament = await db.collection('tournaments')
       .findOne({ _id: new ObjectId(tid) })
-      
+
     return res.status(200).json(tournament)
   }
 

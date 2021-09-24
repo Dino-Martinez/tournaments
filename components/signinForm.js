@@ -8,7 +8,7 @@ export default function SignInForm () {
     <article>
       {!session &&
         <>
-          <h2>You must be signed in to use this site.</h2>
+          <h2>You must be signed in to use this page.</h2>
           <button onClick={() => signIn('google')}>Sign in</button>
           <p>Sign in with Google</p>
         </>

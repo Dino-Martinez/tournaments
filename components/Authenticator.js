@@ -1,7 +1,11 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../hooks/useAuth'
 import SignInForm from './signinForm'
-export default function Authenticator ({ setReady, session, authenticating }) {
+
+export default function Authenticator ({ setReady }) {
+  const [session, authenticating] = useContext(AuthContext)
   useEffect(() => { if (session) setReady(true) }, [session])
+
   return (
     <>
       {authenticating &&

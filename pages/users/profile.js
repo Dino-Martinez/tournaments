@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import useApi from '../../hooks/useApi'
 import Authenticator from '../../components/Authenticator'
 import ApiResolver from '../../components/ApiResolver'
 import ProfileData from '../../components/ProfileData'
+import { AuthContext } from '../../hooks/useAuth'
 
-export default function Profile ({ session, authenticating }) {
+export default function Profile () {
+  const [session] = useContext(AuthContext)
   const [data, refetch, loading] = useApi('/api/users')
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
@@ -14,9 +16,9 @@ export default function Profile ({ session, authenticating }) {
 
   return (
     <>
-      <Authenticator setReady={setAuthenticatedStatus} session={session} authenticating={authenticating} />
+      <Authenticator setReady={setAuthenticatedStatus} />
       <ApiResolver loading={loading} data={data}>
-        <ProfileData data={data} refresh={refresh} session={session}></ProfileData>
+        <ProfileData data={data} refresh={refresh}></ProfileData>
       </ApiResolver>
     </>
   )

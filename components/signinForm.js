@@ -1,6 +1,9 @@
 import { signIn, signOut } from 'next-auth/client'
+import { useContext } from 'react'
+import { AuthContext } from '../hooks/useAuth'
 
-export default function SignInForm ({ session }) {
+export default function SignInForm () {
+  const [session] = useContext(AuthContext)
   return (
     <article>
       {!session &&

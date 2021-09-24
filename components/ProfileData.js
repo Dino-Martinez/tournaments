@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import useApi from '../hooks/useApi'
 import InputForm from './InputForm'
 import DataList from './DataList'
+import { AuthContext } from '../hooks/useAuth'
 
 // This is the shape of our input form for updating a user profile
 const fields = [
@@ -34,7 +35,8 @@ const shape = [...fields,
   }
 ]
 
-export default function ProfileData ({ data, refresh, session }) {
+export default function ProfileData ({ data, refresh }) {
+  const [session] = useContext(AuthContext)
   const [update, refetch, loading] = useApi('/api/users')
   const onSubmit = (values) => {
     console.log(values)

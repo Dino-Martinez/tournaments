@@ -1,12 +1,7 @@
-import { capitalCase } from 'change-case'
 import useObject from '../hooks/useObject'
+import generateKey from '../lib/generateKey'
 
-function * generateKey () {
-  let count = 0
-  while (true) yield count++
-}
-
-export default function InputForm ({ fields, onSubmit }) {
+export default function InputForm ({ fields, onSubmit, classNames = { form: 'input-form', fieldset: 'input-form__fieldset', label: 'input-form__label', input: 'input-form__control' } }) {
   const keys = generateKey()
   const [data, setValue] = useObject()
 
@@ -16,12 +11,12 @@ export default function InputForm ({ fields, onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={classNames.form}>
       {fields.map(field => {
         return (
-          <fieldset key={keys.next().value}>
-            <label htmlFor={field.title}>{capitalCase(field.title)}</label>
-            <input name={field.title} type={field.type} onChange={(e) => setValue(field.title, e.target.value)}/>
+          <fieldset key={keys.next().value} className={classNames.fieldset}>
+            <label htmlFor={field.key} className={classNames.label}>{field.label}</label>
+            <input name={field.key} type={field.type} onChange={(e) => setValue(field.key, e.target.value)} className={classNames.input}/>
           </fieldset>
         )
       })}

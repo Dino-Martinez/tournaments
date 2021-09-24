@@ -8,13 +8,15 @@ export default function Profile ({ session, authenticating }) {
   const [data, refetch, loading] = useApi('/api/users')
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
-  useEffect(() => { if (authenticated) refetch(session.user.email) }, [authenticated])
+  const refresh = () => { if (authenticated) refetch(session.user.email) }
+
+  useEffect(() => { refresh() }, [authenticated])
 
   return (
     <>
       <Authenticator setReady={setAuthenticatedStatus} session={session} authenticating={authenticating} />
       <ApiResolver loading={loading} data={data}>
-        <ProfileData data={data}></ProfileData>
+        <ProfileData data={data} refresh={refresh} session={session}></ProfileData>
       </ApiResolver>
     </>
   )

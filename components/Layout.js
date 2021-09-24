@@ -12,6 +12,9 @@ export default function Layout ({ children }) {
         <Link href="/">
           <a>Home</a>
         </Link>
+        <Link href="/tournaments">
+          <a>Tournaments</a>
+        </Link>
         {session &&
           <>
             <Link href='/users/profile'>

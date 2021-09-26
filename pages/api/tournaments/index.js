@@ -10,4 +10,13 @@ export default async function handler (req, res) {
 
     return res.status(200).json(tournaments)
   }
+
+  if (req.method === 'POST') {
+    const tournament = req.body
+
+    const result = await db.collection('tournaments')
+      .insertOne(tournament)
+
+    return res.status(200).json(result)
+  }
 }

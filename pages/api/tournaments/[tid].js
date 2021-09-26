@@ -12,15 +12,6 @@ export default async function handler (req, res) {
     return res.status(200).json(tournament)
   }
 
-  if (req.method === 'POST') {
-    const tournament = req.body
-
-    const result = await db.collection('tournaments')
-      .insertOne(tournament)
-
-    return res.status(200).json(result)
-  }
-
   if (req.method === 'PUT') {
     const update = req.body
 

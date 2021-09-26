@@ -22,6 +22,9 @@ export default function AllTournaments () {
           })
         }
       </ul>
+      <Link href="/tournaments/create">
+        <a>Create new Tournament</a>
+      </Link>
     </div>
   )
 }

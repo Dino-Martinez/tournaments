@@ -50,3 +50,14 @@
   top: 100%;
   opacity: 1;
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 100vw;
+  background: lightblue;
+  position: fixed;
+  bottom: 0;
+}

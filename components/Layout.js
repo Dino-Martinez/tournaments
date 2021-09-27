@@ -4,6 +4,7 @@ import { AuthContext } from '../hooks/useAuth'
 import { signIn, signOut } from 'next-auth/client'
 import Image from 'next/image'
 import styles from '../styles/nav.module.css'
+import page from '../styles/pages.module.css'
 
 const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -69,8 +70,8 @@ export default function Layout ({ children }) {
           </div>
         </div>
       </nav>
-      <main>{children}</main>
-      <footer>
+      <main className={page.container}>{children}</main>
+      <footer className={styles.footer}>
         <p>Copyright 2021</p>
       </footer>
     </>

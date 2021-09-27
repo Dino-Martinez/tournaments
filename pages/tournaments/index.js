@@ -3,14 +3,13 @@ import useApi from '../../hooks/useApi'
 import generateKey from '../../lib/generateKey'
 import Link from 'next/link'
 import styles from '../../styles/tournaments.module.css'
-import page from '../../styles/pages.module.css'
 
 export default function AllTournaments () {
   const [tournaments, loading] = useApi('/api/tournaments', {}, [], true)
   const keys = generateKey()
   useEffect(() => { console.log(tournaments) }, [loading])
   return (
-    <div className={page.container}>
+    <div>
       <ul className={styles.list}>
         {!loading && tournaments &&
           tournaments.map(tournament => {

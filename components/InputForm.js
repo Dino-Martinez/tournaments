@@ -14,7 +14,6 @@ export default function InputForm ({ fields, onSubmit, classNames = { form: 'inp
     <form onSubmit={handleSubmit} className={classNames.form}>
       {fields.map(field => {
         const attributes = field.attributes || {}
-        console.log(attributes)
         return (
           <fieldset key={keys.next().value} className={classNames.fieldset}>
             <label htmlFor={field.key} className={classNames.label}>{field.label}</label>

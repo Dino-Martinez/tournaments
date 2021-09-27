@@ -1,11 +1,14 @@
 import { signIn, signOut } from 'next-auth/client'
+import { useContext } from 'react'
+import { AuthContext } from '../hooks/useAuth'
 
-export default function SignInForm ({ session }) {
+export default function SignInForm () {
+  const [session] = useContext(AuthContext)
   return (
     <article>
       {!session &&
         <>
-          <h2>You must be signed in to use this site.</h2>
+          <h2>You must be signed in to use this page.</h2>
           <button onClick={() => signIn('google')}>Sign in</button>
           <p>Sign in with Google</p>
         </>

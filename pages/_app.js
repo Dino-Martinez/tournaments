@@ -1,9 +1,20 @@
 import '../styles/globals.css'
-import { useSession } from 'next-auth/client'
+import Layout from '../components/Layout'
+import AuthProvider from '../hooks/useAuth'
+import Head from 'next/head'
 
 function MyApp ({ Component, pageProps }) {
-  const [session, loading] = useSession()
-  return <Component {...pageProps} session={session} authenticating={loading}/>
+  return (
+    <AuthProvider>
+      <Layout>
+        <Head>
+          <title>Tournament Site</title>
+          <meta name="description" content="A webapp to find tournaments" />
+        </Head>
+        <Component {...pageProps}/>
+      </Layout>
+    </AuthProvider>
+  )
 }
 
 export default MyApp

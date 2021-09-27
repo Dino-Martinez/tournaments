@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 const DEFAULT_OPTIONS = {
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  method: 'GET'
 }
 
 export default function useApi (url, options = {}, dependencies = [], runOnMount = false) {
@@ -11,9 +12,10 @@ export default function useApi (url, options = {}, dependencies = [], runOnMount
   const [loading, setLoading] = useState(false)
   const firstUpdate = useRef(!runOnMount)
 
-  const refetch = () => {
+  const refetch = (route = '', newOptions = {}) => {
+    const urlRoute = `${url}/${route}`
     setLoading(true)
-    fetch(url, { ...DEFAULT_OPTIONS, ...options })
+    fetch(urlRoute, { ...DEFAULT_OPTIONS, ...options, ...newOptions })
       .then(res => res.json())
       .then(json => {
         setApiResult(json)
@@ -26,5 +28,5 @@ export default function useApi (url, options = {}, dependencies = [], runOnMount
     if (firstUpdate.current) firstUpdate.current = false
   }, dependencies)
 
-  return [apiResult, refetch, loading]
+  return [apiResult, loading, refetch]
 }

@@ -48,7 +48,7 @@ export default function Layout ({ children }) {
           <a className={styles.link}>Tournaments</a>
         </Link>
         <div className={styles.menu}>
-          <button onClick={toggleHamburger} className={`hamburger hamburger--elastic ${menuOpen ? 'is-active' : ''}`} type="button">
+          <button onClick={toggleHamburger} className={`hamburger hamburger--squeeze ${menuOpen ? 'is-active' : ''}`} type="button">
             <span className="hamburger-box">
               <span className="hamburger-inner">
               </span>

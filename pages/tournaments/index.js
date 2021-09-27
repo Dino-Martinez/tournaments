@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import useApi from '../../hooks/useApi'
 import generateKey from '../../lib/generateKey'
 import Link from 'next/link'
@@ -7,7 +6,7 @@ import styles from '../../styles/tournaments.module.css'
 export default function AllTournaments () {
   const [tournaments, loading] = useApi('/api/tournaments', {}, [], true)
   const keys = generateKey()
-  useEffect(() => { console.log(tournaments) }, [loading])
+
   return (
     <div>
       <ul className={styles.list}>

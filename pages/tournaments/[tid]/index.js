@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import ApiResolver from '../../components/ApiResolver'
-import useApi from '../../hooks/useApi'
-import TournamentData from '../../components/TournamentData'
+import ApiResolver from '../../../components/ApiResolver'
+import useApi from '../../../hooks/useApi'
+import TournamentData from '../../../components/TournamentData'
 
 export default function Tournament () {
   const router = useRouter()
@@ -10,7 +10,7 @@ export default function Tournament () {
 
   return (
     <ApiResolver data={data} loading={loading}>
-      <TournamentData data={data}/>
+      <TournamentData data={data} tid={tid}/>
     </ApiResolver>
   )
 }

@@ -1,0 +1,52 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid black;
+}
+
+.logo {
+  margin-right: 1rem;
+}
+
+.link {
+  margin: 0 .25rem;
+  padding: .5rem .75rem;
+  text-decoration: none;
+  color: black;
+  background: none;
+  border: none;
+}
+
+.link:hover {
+  background: lightgray;
+  cursor: pointer;
+}
+
+.menu {
+  margin-left: auto;
+  position: relative;
+}
+
+.menuGroup {
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max-content;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+
+  flex-direction: column;
+}
+
+.display {
+  pointer-events: all;
+  top: 100%;
+  opacity: 1;
+}

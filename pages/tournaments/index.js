@@ -2,28 +2,31 @@ import { useEffect } from 'react'
 import useApi from '../../hooks/useApi'
 import generateKey from '../../lib/generateKey'
 import Link from 'next/link'
+import styles from '../../styles/tournaments.module.css'
+import page from '../../styles/pages.module.css'
 
 export default function AllTournaments () {
   const [tournaments, loading] = useApi('/api/tournaments', {}, [], true)
   const keys = generateKey()
   useEffect(() => { console.log(tournaments) }, [loading])
   return (
-    <div>
-      <ul>
+    <div className={page.container}>
+      <ul className={styles.list}>
         {!loading && tournaments &&
           tournaments.map(tournament => {
             return (
-              <li key={keys.next().value}>
+              <li key={keys.next().value} className={styles.listItem}>
                 <Link href={`/tournaments/${tournament._id}`}>
-                  <a>{tournament.title}</a>
+                  <a className={styles.link}>{tournament.title}</a>
                 </Link>
+                - {tournament.date ? tournament.date : 'No date specified'}
               </li>
             )
           })
         }
       </ul>
       <Link href="/tournaments/create">
-        <a>Create new Tournament</a>
+        <a className={styles.link}>Create Tournament</a>
       </Link>
     </div>
   )

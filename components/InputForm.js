@@ -13,10 +13,12 @@ export default function InputForm ({ fields, onSubmit, classNames = { form: 'inp
   return (
     <form onSubmit={handleSubmit} className={classNames.form}>
       {fields.map(field => {
+        const attributes = field.attributes || {}
+        console.log(attributes)
         return (
           <fieldset key={keys.next().value} className={classNames.fieldset}>
             <label htmlFor={field.key} className={classNames.label}>{field.label}</label>
-            <input name={field.key} type={field.type} onChange={(e) => setValue(field.key, e.target.value)} className={classNames.input}/>
+            <input name={field.key} type={field.type} {...attributes} onChange={(e) => setValue(field.key, e.target.value)} className={classNames.input}/>
           </fieldset>
         )
       })}

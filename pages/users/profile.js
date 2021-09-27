@@ -7,7 +7,7 @@ import { AuthContext } from '../../hooks/useAuth'
 
 export default function Profile () {
   const [session] = useContext(AuthContext)
-  const [data, refetch, loading] = useApi('/api/users')
+  const [data, loading, refetch] = useApi('/api/users')
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
   const refresh = () => { if (authenticated) refetch(session.user.email) }

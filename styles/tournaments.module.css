@@ -1,0 +1,22 @@
+.list {
+  padding: 0;
+}
+
+.listItem {
+  list-style: none;
+  padding: .75rem 0;
+}
+
+.link {
+  padding: .5rem .75rem;
+  text-decoration: none;
+  color:slateblue;
+  background: none;
+  border: none;
+  font-weight: 600;
+}
+
+.link:hover {
+  background: lightgray;
+  cursor: pointer;
+}

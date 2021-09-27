@@ -37,9 +37,8 @@ const shape = [...fields,
 
 export default function ProfileData ({ data, refresh }) {
   const [session] = useContext(AuthContext)
-  const [update, refetch, loading] = useApi('/api/users')
+  const [update, loading, refetch] = useApi('/api/users')
   const onSubmit = (values) => {
-    console.log(values)
     refetch(session.user.email, { method: 'PUT', body: JSON.stringify(values) })
   }
 

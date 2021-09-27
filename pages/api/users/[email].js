@@ -3,7 +3,7 @@ import { connectToDatabase } from '../../../lib/mongodb'
 export default async function handler (req, res) {
   const { email } = req.query
   const { db } = await connectToDatabase()
-  console.log('Trying...', req.method, email)
+
   if (req.method === 'GET') {
     const user = await db.collection('users')
       .findOne({ email: email })

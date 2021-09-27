@@ -1,7 +1,7 @@
 import useObject from '../hooks/useObject'
 import generateKey from '../lib/generateKey'
 
-export default function InputForm ({ fields, onSubmit, classNames = { form: 'input-form', fieldset: 'input-form__fieldset', label: 'input-form__label', input: 'input-form__control' } }) {
+export default function InputForm ({ fields, onSubmit, classNames = { form: 'input-form', fieldset: 'input-form__fieldset', label: 'input-form__label', input: 'input-form__control', submit: 'input-form__submit' } }) {
   const keys = generateKey()
   const [data, setValue] = useObject()
 
@@ -21,7 +21,7 @@ export default function InputForm ({ fields, onSubmit, classNames = { form: 'inp
           </fieldset>
         )
       })}
-      <input type="submit" value="Submit"/>
+      <input type="submit" value="Submit" className={classNames.submit}/>
     </form>
   )
 }

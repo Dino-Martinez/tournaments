@@ -25,7 +25,7 @@ export default function DataList ({ shape, data, classNames = { ul: 'data-list',
       {shape.map((entry) => {
         return (
           <li key={keys.next().value} className={classNames.li}>
-            <p className={classNames.p}>{entry.label}</p>
+            <p className={classNames.p}>{entry.label}:</p>
             <p className={classNames.p}>{data[entry.key]}</p>
           </li>
         )

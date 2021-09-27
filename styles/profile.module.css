@@ -1,0 +1,16 @@
+.list {
+  list-style: none;
+  padding :0;
+}
+
+.listItem {
+  margin: .75rem 0;
+}
+
+.listText {
+  display: inline;
+}
+
+.listText:first-child {
+  margin-right: 1rem;
+}

@@ -1,0 +1,21 @@
+.button {
+  padding: .5rem .75rem;
+  text-decoration: none;
+  color: black;
+  border: none;
+  background: none;
+}
+
+.button.border {
+  border: 1px solid black;
+}
+
+.button:hover {
+  background: lightgray;
+  cursor: pointer;
+}
+
+.container {
+  width: 75vw;
+  margin: auto;
+}

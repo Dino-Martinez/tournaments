@@ -3,6 +3,7 @@ import useApi from '../hooks/useApi'
 import InputForm from './InputForm'
 import DataList from './DataList'
 import { AuthContext } from '../hooks/useAuth'
+import styles from '../styles/profile.module.css'
 
 // This is the shape of our input form for updating a user profile
 const fields = [
@@ -49,7 +50,7 @@ export default function ProfileData ({ data, refresh }) {
   }, [update, loading])
   return (
     <>
-      <DataList data={data} shape={shape}/>
+      <DataList data={data} shape={shape} classNames={ { ul: styles.list, li: styles.listItem, p: styles.listText } }/>
       <InputForm fields={fields} onSubmit={onSubmit}></InputForm>
     </>
   )

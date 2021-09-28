@@ -7,7 +7,7 @@ button {
   margin: 0;
   font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-size: 16px;
+  font-size: 16px;
 }
 
 html, body {
@@ -19,35 +19,6 @@ html, body {
   transition: all .1s ease;
 }
 
-/* Forms styles */
-.input-form {
- border-top: 1px solid black;
- width: max-content;
-} 
-.input-form__fieldset {
-  border: none;
-  padding: .5rem 0;
-  margin: 0;
-} 
-.input-form__label {
- margin-right: .5rem;
-} 
-.input-form__control {
-
-}
-
-.input-form__submit {
-  padding: .5rem .75rem;
-  text-decoration: none;
-  color: black;
-  border: 1px solid black;
-  background: none;
-}
-
-.input-form__submit:hover {
-  background: lightgray;
-  cursor: pointer;
-}
 /* Auth loader */
 .loading {
   display: flex;

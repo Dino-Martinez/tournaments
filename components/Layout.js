@@ -4,7 +4,7 @@ import { AuthContext } from '../hooks/useAuth'
 import { signIn, signOut } from 'next-auth/client'
 import Image from 'next/image'
 import styles from '../styles/nav.module.css'
-import page from '../styles/pages.module.css'
+import utils from '../styles/utilities.module.css'
 
 const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -43,10 +43,10 @@ export default function Layout ({ children }) {
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
         /></div>
         <Link href="/" >
-          <a className={styles.link}>Home</a>
+          <a className={utils.button}>Home</a>
         </Link>
         <Link href="/tournaments" >
-          <a className={styles.link}>Tournaments</a>
+          <a className={utils.button}>Tournaments</a>
         </Link>
         <div className={styles.menu}>
           <button onClick={toggleHamburger} className={`hamburger hamburger--squeeze ${menuOpen ? 'is-active' : ''}`} type="button">
@@ -59,18 +59,18 @@ export default function Layout ({ children }) {
             {session &&
             <>
               <Link href='/users/profile' >
-                <a className={`${styles.link} ${styles.menuItem}`}>Profile</a>
+                <a className={`${utils.button} ${styles.menuItem}`}>Profile</a>
               </Link>
-              <button onClick={() => signOut()} className={`${styles.link} ${styles.menuItem}`}>Sign out</button>
+              <button onClick={() => signOut()} className={`${utils.button} ${styles.menuItem}`}>Sign out</button>
             </>
             }
             {!session &&
-            <button onClick={() => signIn('google')} className={`${styles.link} ${styles.menuItem}`}>Sign in</button>
+            <button onClick={() => signIn('google')} className={`${utils.button} ${styles.menuItem}`}>Sign in</button>
             }
           </div>
         </div>
       </nav>
-      <main className={page.container}>{children}</main>
+      <main className={utils.container}>{children}</main>
       <footer className={styles.footer}>
         <p>Copyright 2021</p>
       </footer>

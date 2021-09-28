@@ -1,7 +1,9 @@
 import useObject from '../hooks/useObject'
 import generateKey from '../lib/generateKey'
+import styles from '../styles/form.module.css'
+import utils from '../styles/utilities.module.css'
 
-export default function InputForm ({ fields, onSubmit, classNames = { form: 'input-form', fieldset: 'input-form__fieldset', label: 'input-form__label', input: 'input-form__control', submit: 'input-form__submit' } }) {
+export default function InputForm ({ fields, onSubmit, classNames = styles }) {
   const keys = generateKey()
   const [data, setValue] = useObject()
 
@@ -21,7 +23,7 @@ export default function InputForm ({ fields, onSubmit, classNames = { form: 'inp
           </fieldset>
         )
       })}
-      <input type="submit" value="Submit" className={classNames.submit}/>
+      <input type="submit" value="Submit" className={`${classNames.submit} ${utils.button}`}/>
     </form>
   )
 }

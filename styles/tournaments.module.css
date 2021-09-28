@@ -8,15 +8,6 @@
 }
 
 .link {
-  padding: .5rem .75rem;
-  text-decoration: none;
-  color:slateblue;
-  background: none;
-  border: none;
+  color:slateblue!important;
   font-weight: 600;
-}
-
-.link:hover {
-  background: lightgray;
-  cursor: pointer;
 }

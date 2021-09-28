@@ -13,16 +13,6 @@
 
 .link {
   margin: 0 .25rem;
-  padding: .5rem .75rem;
-  text-decoration: none;
-  color: black;
-  background: none;
-  border: none;
-}
-
-.link:hover {
-  background: lightgray;
-  cursor: pointer;
 }
 
 .menu {

@@ -1,30 +1,20 @@
 import useApi from '../../hooks/useApi'
-import generateKey from '../../lib/generateKey'
 import Link from 'next/link'
 import styles from '../../styles/tournaments.module.css'
+import utils from '../../styles/utilities.module.css'
+import ApiResolver from '../../components/ApiResolver'
+import TournamentList from '../../components/TournamentList'
 
 export default function AllTournaments () {
   const [tournaments, loading] = useApi('/api/tournaments', {}, [], true)
-  const keys = generateKey()
 
   return (
     <div>
-      <ul className={styles.list}>
-        {!loading && tournaments &&
-          tournaments.map(tournament => {
-            return (
-              <li key={keys.next().value} className={styles.listItem}>
-                <Link href={`/tournaments/${tournament._id}`}>
-                  <a className={styles.link}>{tournament.title}</a>
-                </Link>
-                - {tournament.date ? tournament.date : 'No date specified'}
-              </li>
-            )
-          })
-        }
-      </ul>
+      <ApiResolver data={tournaments} loading={loading}>
+        <TournamentList data={tournaments} />
+      </ApiResolver>
       <Link href="/tournaments/create">
-        <a className={styles.link}>Create Tournament</a>
+        <a className={`${utils.button} ${styles.link}`}>Create Tournament</a>
       </Link>
     </div>
   )

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-export default function useObject () {
-  const [obj, setObj] = useState({})
+export default function useObject (start = {}) {
+  const [obj, setObj] = useState(start)
 
   const setValue = (key, val) => {
     setObj(prevState => ({

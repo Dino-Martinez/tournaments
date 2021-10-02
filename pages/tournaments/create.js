@@ -5,11 +5,16 @@ import Authenticator from '../../components/Authenticator'
 import Router from 'next/router'
 import { AuthContext } from '../../hooks/useAuth'
 
+const minLength = (value) => {
+  return value.length < 5
+}
+
 const fields = [
   {
     key: 'title',
     type: 'text',
-    label: 'Title'
+    label: 'Title',
+    validate: minLength
   },
   {
     key: 'description',

@@ -31,6 +31,27 @@ export default function InputForm ({ fields, onSubmit, classNames = styles }) {
     <form onSubmit={handleSubmit} className={classNames.form}>
       {fields.map(field => {
         const attributes = field.attributes || {}
+
+        if (field.type === 'select') {
+          field.options.sort((left, right) => {
+            return left.label === 'Other' ? -1 : left.label < right.label
+          })
+
+          return (
+            <fieldset key={keys.next().value} className={classNames.fieldset}>
+              <label htmlFor={field.key} className={classNames.label}>{field.label}</label>
+              <select name={field.key} onChange={(e) => handleChange(e, field)} className={classNames.input}>
+                {field.options.map(option => {
+                  return (
+                    <option key={keys.next().value} value={option.value}>{option.label}</option>
+                  )
+                })}
+              </select>
+              <p className={`${classNames.error} ${field.error ? classNames.throw : ''}`}></p>
+            </fieldset>
+          )
+        }
+
         return (
           <fieldset key={keys.next().value} className={classNames.fieldset}>
             <label htmlFor={field.key} className={classNames.label}>{field.label}</label>

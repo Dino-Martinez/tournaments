@@ -9,7 +9,7 @@ const minLength = (value) => {
   return value.length < 5
 }
 
-const fields = [
+const defaults = [
   {
     key: 'title',
     type: 'text',
@@ -36,6 +36,7 @@ export default function CreateTournament () {
   const [games, loadingGames] = useApi('/api/games', {}, [], true)
   const [session] = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)
+  const [fields, addField] = useState(defaults)
 
   const onSubmit = (values) => {
     values.author = session.user.email
@@ -68,7 +69,7 @@ export default function CreateTournament () {
         options
       }
 
-      fields.push(gameField)
+      addField([...fields, { ...gameField }])
     }
   }, [loadingGames, games])
 

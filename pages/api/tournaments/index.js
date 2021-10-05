@@ -1,4 +1,5 @@
 import { connectToDatabase } from '../../../lib/mongodb'
+import { ObjectId } from 'mongodb'
 
 export default async function handler (req, res) {
   const { db } = await connectToDatabase()
@@ -13,6 +14,8 @@ export default async function handler (req, res) {
 
   if (req.method === 'POST') {
     const tournament = req.body
+
+    if (tournament.game) tournament.game = new ObjectId(tournament.game)
 
     const result = await db.collection('tournaments')
       .insertOne(tournament)

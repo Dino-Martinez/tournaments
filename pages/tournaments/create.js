@@ -33,6 +33,7 @@ const fields = [
 
 export default function CreateTournament () {
   const [data, loading, refetch] = useApi('/api/tournaments')
+  const [games, loadingGames] = useApi('/api/games', {}, [], true)
   const [session] = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
@@ -46,6 +47,30 @@ export default function CreateTournament () {
       if (data.result.ok) Router.push('/tournaments')
     }
   }, [loading, data])
+
+  useEffect(() => {
+    if (!loadingGames && games) {
+      const options = []
+
+      games.forEach(game => {
+        options.push(
+          {
+            label: game.name,
+            value: game._id
+          }
+        )
+      })
+
+      const gameField = {
+        key: 'game',
+        type: 'select',
+        label: 'Select game',
+        options
+      }
+
+      fields.push(gameField)
+    }
+  }, [loadingGames, games])
 
   return (
     <>

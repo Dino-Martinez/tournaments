@@ -8,11 +8,11 @@ export default function TeamData ({ data, tid }) {
   return (
     <>
       <h2>{data.name}</h2>
-      <p>{data.description}</p>
-      {data.members &&
+      <p>Owner: {data.owner}</p>
+      {data.players.length > 0 &&
         <ul>
-          Members:
-          {data.members.map(name => <li key={keys.next().value}>{name}</li>)}
+          Players:
+          {data.players.map(name => <li key={keys.next().value}>{name}</li>)}
         </ul>
       }
       <Link href={`/teams/${tid}/register`}>

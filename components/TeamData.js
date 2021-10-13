@@ -15,7 +15,7 @@ export default function TeamData ({ data, tid }) {
           {data.members.map(name => <li key={keys.next().value}>{name}</li>)}
         </ul>
       } */}
-      <Link href={`/teams/${tid}/join`}>
+      <Link href={`/teams/${tid}/register`}>
         <a className={`${utils.button} ${styles.submit}`}>Join Team</a>
       </Link>
     </>

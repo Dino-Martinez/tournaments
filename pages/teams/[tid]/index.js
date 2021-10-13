@@ -3,6 +3,12 @@ import ApiResolver from '../../../components/ApiResolver'
 import useApi from '../../../hooks/useApi'
 import TeamData from '../../../components/TeamData'
 
+export async function getServerSideProps (context) {
+  return {
+    props: {} // will be passed to the page component as props
+  }
+}
+
 export default function Team () {
   const router = useRouter()
   const { tid } = router.query

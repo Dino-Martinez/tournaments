@@ -3,6 +3,12 @@ import ApiResolver from '../../../components/ApiResolver'
 import useApi from '../../../hooks/useApi'
 import TournamentData from '../../../components/TournamentData'
 
+export async function getServerSideProps (context) {
+  return {
+    props: {} // will be passed to the page component as props
+  }
+}
+
 export default function Tournament () {
   const router = useRouter()
   const { tid } = router.query

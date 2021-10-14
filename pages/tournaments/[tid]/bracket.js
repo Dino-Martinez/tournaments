@@ -1,4 +1,4 @@
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import ApiResolver from '../../../components/ApiResolver'
 import useApi from '../../../hooks/useApi'
 import { Bracket } from 'react-brackets'

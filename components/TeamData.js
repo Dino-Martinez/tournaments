@@ -9,10 +9,10 @@ export default function TeamData ({ data, tid }) {
     <>
       <h2>{data.name}</h2>
       <p>Owner: {data.owner}</p>
-      {data.players.length > 0 &&
+      {data.members.length > 0 &&
         <ul>
           Players:
-          {data.players.map(name => <li key={keys.next().value}>{name}</li>)}
+          {data.members.map(member => <li key={keys.next().value}>{member.email}</li>)}
         </ul>
       }
       <Link href={`/teams/${tid}/register`}>

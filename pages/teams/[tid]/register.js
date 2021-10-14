@@ -10,7 +10,7 @@ export default function TeamRegistration () {
   const [data, loading, refetch] = useApi(`/api/teams/${tid}/register`)
   const submit = () => {
     const update = {
-      member: session.user.email
+      member: { email: session.user.email, isManager: false, isPlayer: true }
     }
     refetch('', { method: 'POST', body: JSON.stringify(update) })
   }

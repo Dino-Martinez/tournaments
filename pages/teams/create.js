@@ -23,9 +23,11 @@ export default function CreateTeam () {
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
   const onSubmit = (values) => {
+    console.log(values)
     values.author = session.user.email
     values.owner = values.author
-    const isPlayer = values.authorIsPlayer === 'on' ? values.players = [values.author] : values.players = []
+    const isPlayer = values.authorIsPlayer === 'on'
+    console.log(isPlayer)
     values.members = [{ email: values.author, isManager: true, isPlayer }]
     delete values.authorIsPlayer
     refetch('', { method: 'POST', body: JSON.stringify(values) })

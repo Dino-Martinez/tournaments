@@ -6,16 +6,11 @@ export default async function handler (req, res) {
   const { db } = await connectToDatabase()
 
   if (req.method === 'POST') {
-    const { registered } = req.body
+    const { member } = req.body
 
-    const team = await db.collection('teams')
-      .findOne({ _id: new ObjectId(registered) })
-
-    const players = team.members.filter(member => member.isPlayer).map(member => member.email)
-
-    const result = await db.collection('tournaments')
+    const result = await db.collection('teams')
       .updateOne({ _id: new ObjectId(tid) },
-        { $addToSet: { registered: { $each: players } } })
+        { $addToSet: { members: member } })
 
     return res.status(200).json(result)
   }

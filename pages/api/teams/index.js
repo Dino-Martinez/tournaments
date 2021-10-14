@@ -13,8 +13,17 @@ export default async function handler (req, res) {
   }
 
   if (req.method === 'POST') {
-    const team = req.body
+    const request = req.body
 
+    if (request.query) {
+      const teams = await db.collection('teams')
+        .find(request.query)
+        .toArray()
+
+      return res.status(200).json(teams)
+    }
+
+    const team = request
     if (team.game) team.game = new ObjectId(team.game)
 
     const result = await db.collection('teams')

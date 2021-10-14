@@ -68,9 +68,25 @@ export default function CreateTournament () {
         label: 'Select game',
         options
       }
-
       addField([...fields, { ...gameField }])
     }
+
+    // const maxTeamsField = {
+    //   key: 'maxTeams',
+    //   type: 'select',
+    //   label: 'Number of Teams',
+    //   options: [
+    //     {
+    //       label: '8',
+    //       value: '8'
+    //     },
+    //     {
+    //       label: '16',
+    //       value: '16'
+    //     }
+    //   ]
+    // }
+    // addField([...fields, { ...maxTeamsField }])
   }, [loadingGames, games])
 
   return (

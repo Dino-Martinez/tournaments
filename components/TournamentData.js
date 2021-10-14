@@ -18,6 +18,9 @@ export default function TournamentData ({ data, tid }) {
       <Link href={`/tournaments/${tid}/register`}>
         <a className={`${utils.button} ${styles.submit}`}>Register</a>
       </Link>
+      <Link href={`/tournaments/${tid}/bracket`}>
+        <a className={`${utils.button} ${styles.submit}`}>Bracket Page</a>
+      </Link>
     </>
   )
 }

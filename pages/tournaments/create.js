@@ -28,6 +28,21 @@ const defaults = [
     attributes: {
       min: new Date().toISOString().split('T')[0]
     }
+  },
+  {
+    key: 'maxTeams',
+    type: 'select',
+    label: 'Number of Teams',
+    options: [
+      {
+        label: '8',
+        value: '8'
+      },
+      {
+        label: '16',
+        value: '16'
+      }
+    ]
   }
 ]
 
@@ -68,7 +83,6 @@ export default function CreateTournament () {
         label: 'Select game',
         options
       }
-
       addField([...fields, { ...gameField }])
     }
   }, [loadingGames, games])

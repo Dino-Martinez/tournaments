@@ -23,9 +23,9 @@ const handler = async (req, res) => {
       const numMatches = tournament.maxTeams / (Math.pow(2, i + 1))
       for (let j = 0; j < numMatches; j++) {
         const index = i * numMatches + j
-        const teams = [tournament.registered[index], tournament.registered[tournament.maxTeams - index]]
+        const teams = i === 0 ? [tournament.registered[index], tournament.registered[tournament.maxTeams - index - 1]] : [undefined, undefined]
         const seed = {
-          id: index, // refactor for unique ID
+          id: index,
           date: 'Today',
           teams: [{ name: teams[0] ? teams[0].name : 'TBD' }, { name: teams[1] ? teams[1].name : 'TBD' }]
         }

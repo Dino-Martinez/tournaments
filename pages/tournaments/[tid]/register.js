@@ -15,6 +15,7 @@ export default function TournamentRegistration () {
 
   const submit = () => {
     if (teams && !loadingTeams) {
+      console.log(selected)
       const update = {
         registered: selected
       }

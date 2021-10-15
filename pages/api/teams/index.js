@@ -1,14 +1,12 @@
-import { connectToDatabase } from '../../../lib/mongodb'
-import { ObjectId } from 'mongodb'
+import Team from '../../../models/Team'
+import connectDB from '../../../lib/db'
 
-export default async function handler (req, res) {
-  const { db } = await connectToDatabase()
-
+const handler = async (req, res) => {
   if (req.method === 'GET') {
-    const teams = await db.collection('teams')
-      .find()
-      .toArray()
-
+    const teams = await Team
+      .find({})
+      .populate('members')
+      .lean()
     return res.status(200).json(teams)
   }
 
@@ -16,19 +14,20 @@ export default async function handler (req, res) {
     const request = req.body
 
     if (request.query) {
-      const teams = await db.collection('teams')
+      const teams = await Team
         .find(request.query)
-        .toArray()
+        .populate('members')
+        .lean()
 
       return res.status(200).json(teams)
     }
 
-    const team = request
-    if (team.game) team.game = new ObjectId(team.game)
+    const team = new Team(request)
 
-    const result = await db.collection('teams')
-      .insertOne(team)
+    const result = await team.save()
 
     return res.status(200).json(result)
   }
 }
+
+export default connectDB(handler)

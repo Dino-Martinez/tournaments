@@ -6,20 +6,21 @@ import { useContext, useEffect } from 'react'
 export default function TeamRegistration () {
   const router = useRouter()
   const { tid } = router.query
-  const [session] = useContext(AuthContext)
+  // eslint-disable-next-line no-unused-vars
+  const [session, waiting, user] = useContext(AuthContext)
   const [data, loading, refetch] = useApi(`/api/teams/${tid}/register`)
   const submit = () => {
     const update = {
-      member: { email: session.user.email, isManager: false, isPlayer: true }
+      member: user._id
     }
     refetch('', { method: 'POST', body: JSON.stringify(update) })
   }
 
   useEffect(() => {
-    if (!loading && data && data.ok) {
+    if (!loading && data && data.acknowledged) {
       Router.push(`/teams/${tid}`)
     }
-  }, [loading])
+  }, [data, loading])
   return (
     <>
       <p>Registering for {tid}</p>

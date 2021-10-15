@@ -24,7 +24,7 @@ export default function TournamentRegistration () {
   }
 
   useEffect(() => {
-    if (!loading && data && data.ok) {
+    if (!loading && data) {
       Router.push(`/tournaments/${tid}`)
     }
   }, [loading])

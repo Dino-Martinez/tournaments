@@ -7,12 +7,15 @@ export default function TournamentData ({ data, tid }) {
   const keys = generateKey()
   return (
     <>
-      <h2>{data.title}</h2>
+      <h2>{data.name}</h2>
       <p>{data.description}</p>
-      {data.registered &&
+      {data.registered.length > 0 &&
         <ul>
           Attendees:
-          {data.registered.map(participant => <li key={keys.next().value}>{participant}</li>)}
+          {data.registered.map(participant => <li key={keys.next().value}>
+            <Link href={`/teams/${participant._id}`}>
+              <a> {participant.name} </a>
+            </Link></li>)}
         </ul>
       }
       <Link href={`/tournaments/${tid}/register`}>

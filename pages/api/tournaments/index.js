@@ -1,25 +1,23 @@
-import { connectToDatabase } from '../../../lib/mongodb'
-import { ObjectId } from 'mongodb'
+import Tournament from '../../../models/Tournament'
+import connectDB from '../../../lib/db'
 
-export default async function handler (req, res) {
-  const { db } = await connectToDatabase()
-
+const handler = async (req, res) => {
   if (req.method === 'GET') {
-    const tournaments = await db.collection('tournaments')
+    const tournaments = await Tournament
       .find()
-      .toArray()
+      .populate('registered')
+      .lean()
 
     return res.status(200).json(tournaments)
   }
 
   if (req.method === 'POST') {
-    const tournament = req.body
+    const tournament = new Tournament(req.body)
 
-    if (tournament.game) tournament.game = new ObjectId(tournament.game)
-
-    const result = await db.collection('tournaments')
-      .insertOne(tournament)
+    const result = await tournament.save()
 
     return res.status(200).json(result)
   }
 }
+
+export default connectDB(handler)

@@ -1,24 +1,33 @@
-import { connectToDatabase } from '../../../../lib/mongodb'
-import { ObjectId } from 'mongodb'
+import Tournament from '../../../../models/Tournament'
+import connectDB from '../../../../lib/db'
 
-export default async function handler (req, res) {
+const handler = async (req, res) => {
   const { tid } = req.query
-  const { db } = await connectToDatabase()
 
   if (req.method === 'GET') {
-    const tournament = await db.collection('tournaments')
-      .findOne({ _id: new ObjectId(tid) })
+    const tournament = await Tournament
+      .findOne({ _id: tid })
+      .populate('registered')
+      .lean()
+
     const rounds = []
-    for (let i = 0; i < Math.log2(tournament.maxTeams); i++) {
+
+    const numRounds = Math.log2(tournament.maxTeams)
+
+    for (let i = 0; i < numRounds; i++) {
       const round = {
         title: `round ${i + 1}`
       }
       const seeds = []
-      for (let n = 0; n < (tournament.maxTeams / (Math.pow(2, i + 1))); n++) {
+
+      const numMatches = tournament.maxTeams / (Math.pow(2, i + 1))
+      for (let j = 0; j < numMatches; j++) {
+        const index = i * numMatches + j
+        const teams = [tournament.registered[index], tournament.registered[tournament.maxTeams - index]]
         const seed = {
-          id: n, // refactor for unique ID
+          id: index, // refactor for unique ID
           date: 'Today',
-          teams: [{ name: `Team ${i}` }, { name: `Team ${n}` }]
+          teams: [{ name: teams[0] ? teams[0].name : 'TBD' }, { name: teams[1] ? teams[1].name : 'TBD' }]
         }
         seeds.push(seed)
       }
@@ -32,9 +41,11 @@ export default async function handler (req, res) {
   if (req.method === 'PUT') {
     const update = req.body
 
-    const result = await db.collection('tournaments')
-      .updateOne({ _id: new ObjectId(tid) }, { $set: update }, { upsert: false })
+    const result = Tournament
+      .updateOne({ _id: tid }, { $set: update }, { upsert: false })
 
     return res.status(200).json(result)
   }
 }
+
+export default connectDB(handler)

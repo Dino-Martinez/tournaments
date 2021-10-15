@@ -10,32 +10,30 @@ const fields = [
     key: 'name',
     type: 'text',
     label: 'Team Name'
-  },
-  {
-    key: 'authorIsPlayer',
-    type: 'checkbox',
-    label: 'Act as a player?'
   }
+  // {
+  //   key: 'authorIsPlayer',
+  //   type: 'checkbox',
+  //   label: 'Act as a player?'
+  // }
 ]
 export default function CreateTeam () {
   const [data, loading, refetch] = useApi('/api/teams')
-  const [session] = useContext(AuthContext)
+  // eslint-disable-next-line no-unused-vars
+  const [session, waiting, user] = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
   const onSubmit = (values) => {
     console.log(values)
     values.author = session.user.email
     values.owner = values.author
-    const isPlayer = values.authorIsPlayer === 'on'
-    console.log(isPlayer)
-    values.members = [{ email: values.author, isManager: true, isPlayer }]
-    delete values.authorIsPlayer
+    values.members = [user._id]
     refetch('', { method: 'POST', body: JSON.stringify(values) })
   }
 
   useEffect(() => {
-    if (!loading && data) {
-      if (data.result.ok) Router.push('/teams')
+    if (!loading && data && data.ok) {
+      Router.push('/teams')
     }
   }, [loading, data])
 

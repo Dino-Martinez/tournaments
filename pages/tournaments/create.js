@@ -11,9 +11,9 @@ const minLength = (value) => {
 
 const defaults = [
   {
-    key: 'title',
+    key: 'name',
     type: 'text',
-    label: 'Title',
+    label: 'Name',
     validate: minLength
   },
   {
@@ -49,18 +49,19 @@ const defaults = [
 export default function CreateTournament () {
   const [data, loading, refetch] = useApi('/api/tournaments')
   const [games, loadingGames] = useApi('/api/games', {}, [], true)
-  const [session] = useContext(AuthContext)
+  // eslint-disable-next-line no-unused-vars
+  const [session, waiting, user] = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)
   const [fields, addField] = useState(defaults)
 
   const onSubmit = (values) => {
-    values.author = session.user.email
+    values.owner = user._id
     refetch('', { method: 'POST', body: JSON.stringify(values) })
   }
 
   useEffect(() => {
-    if (!loading && data) {
-      if (data.result.ok) Router.push('/tournaments')
+    if (!loading && data && data.owner) {
+      Router.push('/tournaments')
     }
   }, [loading, data])
 

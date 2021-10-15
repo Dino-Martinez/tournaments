@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
+import User from './User'
 const Schema = mongoose.Schema
+
 const team = new Schema({
   name: { type: String, required: true },
   owner: { type: String, required: true },
-  members: { type: Array, default: [] }
+  members: [{ type: Schema.Types.ObjectId, ref: User }]
 })
 
-mongoose.models = {}
-
-const Team = mongoose.model('Team', team)
+export const Team = mongoose.models.Team || mongoose.model('Team', team)
 export default Team

@@ -11,7 +11,7 @@ export default function TournamentList ({ data }) {
         return (
           <li key={keys.next().value} className={styles.listItem}>
             <Link href={`/tournaments/${tournament._id}`}>
-              <a className={` ${utils.button} ${styles.link}`}>{tournament.title}</a>
+              <a className={` ${utils.button} ${styles.link}`}>{tournament.name}</a>
             </Link>
                 - {tournament.date ? tournament.date : 'No date specified'}
           </li>

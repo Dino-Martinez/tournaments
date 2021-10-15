@@ -1,22 +1,18 @@
-import { connectToDatabase } from '../../../../lib/mongodb'
-import { ObjectId } from 'mongodb'
+import Tournament from '../../../../models/Tournament'
+import connectDB from '../../../../lib/db'
 
-export default async function handler (req, res) {
+const handler = async (req, res) => {
   const { tid } = req.query
-  const { db } = await connectToDatabase()
 
   if (req.method === 'POST') {
     const { registered } = req.body
-
-    const team = await db.collection('teams')
-      .findOne({ _id: new ObjectId(registered) })
-
-    const players = team.members.filter(member => member.isPlayer).map(member => member.email)
-
-    const result = await db.collection('tournaments')
-      .updateOne({ _id: new ObjectId(tid) },
-        { $addToSet: { registered: { $each: players } } })
+    console.log(registered)
+    const result = await Tournament
+      .updateOne({ _id: tid },
+        { $addToSet: { registered: registered } })
 
     return res.status(200).json(result)
   }
 }
+
+export default connectDB(handler)

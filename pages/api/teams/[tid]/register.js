@@ -1,15 +1,14 @@
-import Tournament from '../../../../models/Tournament'
+import Team from '../../../../models/Team'
 import connectDB from '../../../../lib/db'
 
 const handler = async (req, res) => {
   const { tid } = req.query
 
   if (req.method === 'POST') {
-    const { registered } = req.body
-    console.log(registered)
-    const result = await Tournament
+    const { member } = req.body
+    const result = await Team
       .updateOne({ _id: tid },
-        { $addToSet: { registered: registered } })
+        { $addToSet: { members: member } })
 
     return res.status(200).json(result)
   }

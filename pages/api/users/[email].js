@@ -1,11 +1,11 @@
-import { connectToDatabase } from '../../../lib/mongodb'
+import User from '../../../models/User'
+import connectDB from '../../../lib/db'
 
-export default async function handler (req, res) {
+const handler = async (req, res) => {
   const { email } = req.query
-  const { db } = await connectToDatabase()
 
   if (req.method === 'GET') {
-    const user = await db.collection('users')
+    const user = await User
       .findOne({ email: email })
 
     return res.status(200).json(user)
@@ -14,9 +14,11 @@ export default async function handler (req, res) {
   if (req.method === 'PUT') {
     const update = req.body
 
-    const result = await db.collection('users')
+    const result = await User
       .updateOne({ email: email }, { $set: update }, { upsert: false })
 
     return res.status(200).json(result)
   }
 }
+
+export default connectDB(handler)

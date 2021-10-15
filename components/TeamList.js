@@ -3,17 +3,16 @@ import utils from '../styles/utilities.module.css'
 import styles from '../styles/tournaments.module.css'
 import Link from 'next/link'
 
-export default function TournamentList ({ data }) {
+export default function TeamList ({ data }) {
   const keys = generateKey()
   return (
     <ul className={styles.list}>
-      {data.map(tournament => {
+      {data.map(team => {
         return (
           <li key={keys.next().value} className={styles.listItem}>
-            <Link href={`/tournaments/${tournament._id}`}>
-              <a className={` ${utils.button} ${styles.link}`}>{tournament.name}</a>
+            <Link href={`/teams/${team._id}`}>
+              <a className={` ${utils.button} ${styles.link}`}>{team.name}</a>
             </Link>
-                - {tournament.date ? tournament.date : 'No date specified'}
           </li>
         )
       })

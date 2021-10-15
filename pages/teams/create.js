@@ -32,7 +32,7 @@ export default function CreateTeam () {
   }
 
   useEffect(() => {
-    if (!loading && data && data.ok) {
+    if (!loading && data) {
       Router.push('/teams')
     }
   }, [loading, data])

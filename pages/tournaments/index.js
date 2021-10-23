@@ -6,7 +6,7 @@ import ApiResolver from '../../components/ApiResolver'
 import TournamentList from '../../components/TournamentList'
 
 export default function AllTournaments () {
-  const [tournaments, loading] = useApi('/api/tournaments', {}, [], true)
+  const { data: tournaments, loading } = useApi('/api/tournaments', {}, [], true)
 
   return (
     <div>

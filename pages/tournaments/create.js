@@ -47,10 +47,9 @@ const defaults = [
 ]
 
 export default function CreateTournament () {
-  const [data, loading, refetch] = useApi('/api/tournaments')
-  const [games, loadingGames] = useApi('/api/games', {}, [], true)
-  // eslint-disable-next-line no-unused-vars
-  const [session, waiting, user] = useContext(AuthContext)
+  const { data, loading, refetch } = useApi('/api/tournaments')
+  const { data: games, loading: loadingGames } = useApi('/api/games', {}, [], true)
+  const { user } = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)
   const [fields, addField] = useState(defaults)
 

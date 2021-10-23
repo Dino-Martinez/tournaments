@@ -6,9 +6,8 @@ import { useContext, useEffect } from 'react'
 export default function TeamRegistration () {
   const router = useRouter()
   const { tid } = router.query
-  // eslint-disable-next-line no-unused-vars
-  const [session, waiting, user] = useContext(AuthContext)
-  const [data, loading, refetch] = useApi(`/api/teams/${tid}/register`)
+  const { user } = useContext(AuthContext)
+  const { data, loading, refetch } = useApi(`/api/teams/${tid}/register`)
   const submit = () => {
     const update = {
       member: user._id

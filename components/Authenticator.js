@@ -3,7 +3,7 @@ import { AuthContext } from '../hooks/useAuth'
 import SignInForm from './signinForm'
 
 export default function Authenticator ({ setReady }) {
-  const [session, authenticating] = useContext(AuthContext)
+  const { session, waiting: authenticating } = useContext(AuthContext)
   useEffect(() => { if (session) setReady(true) }, [session])
 
   return (

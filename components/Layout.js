@@ -26,7 +26,7 @@ const toBase64 = (str) =>
     : window.btoa(str)
 
 export default function Layout ({ children }) {
-  const [session] = useContext(AuthContext)
+  const { session } = useContext(AuthContext)
   const [menuOpen, setMenuOpen] = useState(false)
   const toggleHamburger = () => {
     setMenuOpen(prev => !prev)

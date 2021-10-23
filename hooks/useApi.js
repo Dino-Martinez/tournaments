@@ -8,7 +8,7 @@ const DEFAULT_OPTIONS = {
 }
 
 export default function useApi (url, options = {}, dependencies = [], runOnMount = false) {
-  const [apiResult, setApiResult] = useState()
+  const [data, setData] = useState()
   const [loading, setLoading] = useState(false)
   const firstUpdate = useRef(!runOnMount)
 
@@ -18,7 +18,7 @@ export default function useApi (url, options = {}, dependencies = [], runOnMount
     fetch(urlRoute, { ...DEFAULT_OPTIONS, ...options, ...newOptions })
       .then(res => res.json())
       .then(json => {
-        setApiResult(json)
+        setData(json)
         setLoading(false)
       })
   }
@@ -28,5 +28,5 @@ export default function useApi (url, options = {}, dependencies = [], runOnMount
     if (firstUpdate.current) firstUpdate.current = false
   }, dependencies)
 
-  return [apiResult, loading, refetch]
+  return { data, loading, refetch }
 }

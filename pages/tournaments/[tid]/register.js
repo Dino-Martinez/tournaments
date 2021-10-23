@@ -8,9 +8,9 @@ export default function TournamentRegistration () {
   const keys = generateKey()
   const router = useRouter()
   const { tid } = router.query
-  const [session] = useContext(AuthContext)
-  const [data, loading, refetch] = useApi(`/api/tournaments/${tid}/register`)
-  const [teams, loadingTeams, fetchTeams] = useApi('/api/teams/')
+  const { session } = useContext(AuthContext)
+  const { data, loading, refetch } = useApi(`/api/tournaments/${tid}/register`)
+  const { data: teams, loading: loadingTeams, refetch: fetchTeams } = useApi('/api/teams/')
   const [selected, setSelected] = useState()
 
   const submit = () => {

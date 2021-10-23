@@ -5,7 +5,7 @@ import TeamList from '../../components/TeamList'
 import Link from 'next/link'
 
 export default function Teams () {
-  const [teams, loading] = useApi('/api/teams', {}, [], true)
+  const { data: teams, loading } = useApi('/api/teams', {}, [], true)
   return (
     <div>
       <ApiResolver data={teams} loading={loading}>

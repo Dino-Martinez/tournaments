@@ -18,9 +18,8 @@ const fields = [
   // }
 ]
 export default function CreateTeam () {
-  const [data, loading, refetch] = useApi('/api/teams')
-  // eslint-disable-next-line no-unused-vars
-  const [session, waiting, user] = useContext(AuthContext)
+  const { data, loading, refetch } = useApi('/api/teams')
+  const { session, user } = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)
 
   const onSubmit = (values) => {

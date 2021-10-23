@@ -12,7 +12,7 @@ export async function getServerSideProps (context) {
 export default function Team () {
   const router = useRouter()
   const { tid } = router.query
-  const [data, loading] = useApi(`/api/teams/${tid}`, {}, [], true)
+  const { data, loading } = useApi(`/api/teams/${tid}`, {}, [], true)
 
   return (
     <ApiResolver data={data} loading={loading}>

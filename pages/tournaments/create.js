@@ -47,7 +47,7 @@ const defaults = [
 ]
 
 export default function CreateTournament () {
-  const [data, loading, refetch] = useApi('/api/tournaments')
+  const { data, loading, refetch } = useApi('/api/tournaments')
   const { data: games, loading: loadingGames } = useApi('/api/games', {}, [], true)
   const { user } = useContext(AuthContext)
   const [authenticated, setAuthenticatedStatus] = useState(false)

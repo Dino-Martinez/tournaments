@@ -5,7 +5,7 @@ import useApi from './useApi'
 export const AuthContext = createContext()
 
 export default function AuthProvider ({ children }) {
-  const { session, waiting } = useSession()
+  const [session, waiting] = useSession()
   const { data: user, refetch: fetchUser } = useApi('/api/users')
   useEffect(() => {
     if (session && !waiting) fetchUser(session.user.email)

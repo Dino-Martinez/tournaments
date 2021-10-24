@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
  * This component will take reactive state props and conditionally render its children when that state has resolved
  *
  * @component
+ * @prop {string} [message=Loading info...] - The message to be displayed while the data is still resolving
+ * @prop {bool} loading - State to become true once data is resolved
+ * @prop {string} data - Data to be resolved
+ * @prop {Node} children - A React Node. This represents any renderable object, including functional components, class components, and groups of either.
  * @example
  * const {data, loading} = useApi('/api-route')
  *
@@ -31,24 +35,9 @@ const ApiResolver = ({ loading, data, children, message = 'Loading info...' }) =
 }
 
 ApiResolver.propTypes = {
-  /**
-   * Boolean to become true once data is resolved
-   */
   loading: PropTypes.bool.isRequired,
-
-  /**
-   * Data to be resolved
-   */
   data: PropTypes.any.isRequired,
-
-  /**
-   * A React Node. This represents any renderable object, including functional components, class components, and groups of either.
-   */
   children: PropTypes.node.isRequired,
-
-  /**
-   * The message to be displayed while the data is still resolving
-   */
   message: PropTypes.string
 }
 

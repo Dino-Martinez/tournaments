@@ -1,12 +1,12 @@
 import Router, { useRouter } from 'next/router'
 import useApi from '../../../hooks/useApi'
-import { AuthContext } from '../../../hooks/useAuth'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
+import useUser from '../../../hooks/useUser'
 
 export default function TeamRegistration () {
   const router = useRouter()
   const { tid } = router.query
-  const { user } = useContext(AuthContext)
+  const [user] = useUser()
   const { data, loading, refetch } = useApi(`/api/teams/${tid}/register`)
   const submit = () => {
     const update = {

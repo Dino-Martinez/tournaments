@@ -4,6 +4,7 @@ import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import styles from '../styles/nav.module.css'
 import utils from '../styles/utilities.module.css'
+import BackButton from './BackButton'
 
 const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -33,6 +34,7 @@ export default function Layout ({ children }) {
   return (
     <>
       <nav className={styles.navbar}>
+        <BackButton />
         {/** This wrapper div is required to style a next/image: https://stackoverflow.com/questions/65527407/next-image-not-taking-class-properties */}
         <div className={styles.logo}><Image
           src="https://picsum.photos/200"

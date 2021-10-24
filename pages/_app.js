@@ -16,9 +16,9 @@ function MyApp ({
           <meta name="description" content="A webapp to find tournaments" />
         </Head>
 
-        {Component.auth
+        {Component.auth && Component.auth.protected
           ? (
-            <Authenticator>
+            <Authenticator redirect={Component.auth.redirect}>
               <Component {...pageProps}/>
             </Authenticator>
           )

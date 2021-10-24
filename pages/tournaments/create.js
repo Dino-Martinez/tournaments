@@ -94,6 +94,5 @@ export default function CreateTournament () {
 }
 
 CreateTournament.auth = {
-  protected: true,
-  redirect: '/tournaments/create'
+  protected: true
 }

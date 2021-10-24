@@ -42,6 +42,5 @@ export default function CreateTeam () {
 }
 
 CreateTeam.auth = {
-  protected: true,
-  redirect: '/teams/create'
+  protected: true
 }

@@ -7,11 +7,6 @@ export default function TournamentRegistration () {
   const router = useRouter()
   const { tid } = router.query
 
-  TournamentRegistration.auth = {
-    protected: true,
-    redirect: `/tournaments/${tid}/register`
-  }
-
   const keys = generateKey()
   const [user] = useUser()
   const { data, loading, refetch } = useApi(`/api/tournaments/${tid}/register`)
@@ -58,4 +53,9 @@ export default function TournamentRegistration () {
       }
     </>
   )
+}
+
+TournamentRegistration.auth = {
+  protected: true,
+  redirect: '/tournaments'
 }

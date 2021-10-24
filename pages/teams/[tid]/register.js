@@ -7,11 +7,6 @@ export default function TeamRegistration () {
   const router = useRouter()
   const { tid } = router.query
 
-  TeamRegistration.auth = {
-    protected: true,
-    redirect: `/teams/${tid}/register`
-  }
-
   const [user] = useUser()
   const { data, loading, refetch } = useApi(`/api/teams/${tid}/register`)
   const submit = () => {
@@ -32,4 +27,9 @@ export default function TeamRegistration () {
       <button onClick={submit}>Complete Registration</button>
     </>
   )
+}
+
+TeamRegistration.auth = {
+  protected: true,
+  redirect: '/teams/'
 }

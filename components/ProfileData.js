@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
 import useApi from '../hooks/useApi'
 import InputForm from './InputForm'
 import DataList from './DataList'
 import styles from '../styles/profile.module.css'
-import { useSession } from 'next-auth/react'
+import useUser from '../hooks/useUser'
 
 // This is the shape of our input form for updating a user profile
 const fields = [
@@ -36,22 +35,22 @@ const shape = [...fields,
   }
 ]
 
-export default function ProfileData ({ data, refresh }) {
-  const { data: session } = useSession()
-  const { data: update, loading, refetch } = useApi('/api/users')
+export default function ProfileData () {
+  const [user, refresh] = useUser()
+  const { refetch: update } = useApi('/api/users', { method: 'PUT' })
   const onSubmit = (values) => {
-    refetch(session.user.email, { method: 'PUT', body: JSON.stringify(values) })
+    update(user.email, { body: JSON.stringify(values) })
+    refresh()
   }
 
-  useEffect(() => {
-    if (update && !loading) {
-      refresh()
-    }
-  }, [update, loading])
   return (
     <>
-      <DataList data={data} shape={shape} classNames={ { ul: styles.list, li: styles.listItem, p: styles.listText } }/>
-      <InputForm fields={fields} onSubmit={onSubmit}></InputForm>
+      {user &&
+      <>
+        <DataList data={user} shape={shape} classNames={ { ul: styles.list, li: styles.listItem, p: styles.listText } }/>
+        <InputForm fields={fields} onSubmit={onSubmit}></InputForm>
+      </>
+      }
     </>
   )
 }

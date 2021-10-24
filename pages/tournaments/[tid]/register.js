@@ -1,14 +1,14 @@
 import Router, { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import useApi from '../../../hooks/useApi'
-import { AuthContext } from '../../../hooks/useAuth'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import generateKey from '../../../lib/generateKey'
 
 export default function TournamentRegistration () {
   const keys = generateKey()
   const router = useRouter()
   const { tid } = router.query
-  const { session } = useContext(AuthContext)
+  const { data: session } = useSession()
   const { data, loading, refetch } = useApi(`/api/tournaments/${tid}/register`)
   const { data: teams, loading: loadingTeams, refetch: fetchTeams } = useApi('/api/teams/')
   const [selected, setSelected] = useState()

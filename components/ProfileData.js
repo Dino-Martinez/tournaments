@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import useApi from '../hooks/useApi'
 import InputForm from './InputForm'
 import DataList from './DataList'
-import { AuthContext } from '../hooks/useAuth'
 import styles from '../styles/profile.module.css'
+import { useSession } from 'next-auth/react'
 
 // This is the shape of our input form for updating a user profile
 const fields = [
@@ -37,7 +37,7 @@ const shape = [...fields,
 ]
 
 export default function ProfileData ({ data, refresh }) {
-  const [session] = useContext(AuthContext)
+  const { data: session } = useSession()
   const { data: update, loading, refetch } = useApi('/api/users')
   const onSubmit = (values) => {
     refetch(session.user.email, { method: 'PUT', body: JSON.stringify(values) })

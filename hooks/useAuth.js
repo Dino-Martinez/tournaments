@@ -1,5 +1,5 @@
 import { createContext, useEffect } from 'react'
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/react'
 import useApi from './useApi'
 
 export const AuthContext = createContext()

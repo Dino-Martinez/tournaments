@@ -1,21 +1,29 @@
-import { useContext, useEffect } from 'react'
-import { AuthContext } from '../hooks/useAuth'
-import SignInForm from './signinForm'
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-export default function Authenticator ({ setReady }) {
-  const { session, waiting: authenticating } = useContext(AuthContext)
-  useEffect(() => { if (session) setReady(true) }, [session])
+export default function Authenticator ({ children, redirect }) {
+  const { status } = useSession()
+  const router = useRouter()
+  const callbackUrl = redirect || router.pathname
+  useEffect(() => {
+    console.log(status)
+    if (status === 'unauthenticated') {
+      router.push({
+        pathname: '/signin',
+        query: { redirect: callbackUrl }
+      })
+    }
+  }, [status])
 
   return (
     <>
-      {authenticating &&
-        <div className="loading">
+      {status === 'authenticated'
+        ? children
+        : (<div className="loading">
           <h1>Authenticating session...</h1>
           <div className="lds-dual-ring"></div>
-        </div>
-      }
-      {!authenticating && !session &&
-        <SignInForm session={session}></SignInForm>
+        </div>)
       }
     </>
   )

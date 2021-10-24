@@ -1,7 +1,6 @@
 import Link from 'next/link'
-import { useContext, useState } from 'react'
-import { AuthContext } from '../hooks/useAuth'
-import { signIn, signOut } from 'next-auth/client'
+import { useState } from 'react'
+import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import styles from '../styles/nav.module.css'
 import utils from '../styles/utilities.module.css'
@@ -26,7 +25,7 @@ const toBase64 = (str) =>
     : window.btoa(str)
 
 export default function Layout ({ children }) {
-  const { session } = useContext(AuthContext)
+  const { status } = useSession()
   const [menuOpen, setMenuOpen] = useState(false)
   const toggleHamburger = () => {
     setMenuOpen(prev => !prev)
@@ -59,16 +58,18 @@ export default function Layout ({ children }) {
             </span>
           </button>
           <div className={`${styles.menuGroup} ${menuOpen ? styles.display : ''}`}>
-            {session &&
+            {status === 'authenticated' &&
             <>
               <Link href='/users/profile' >
                 <a className={`${utils.button} ${styles.menuItem}`}>Profile</a>
               </Link>
-              <button onClick={() => signOut()} className={`${utils.button} ${styles.menuItem}`}>Sign out</button>
+              <button onClick={() => signOut({ callbackUrl: `${window.location.origin}` })} className={`${utils.button} ${styles.menuItem}`}>Sign out</button>
             </>
             }
-            {!session &&
-            <button onClick={() => signIn('google')} className={`${utils.button} ${styles.menuItem}`}>Sign in</button>
+            {status !== 'authenticated' &&
+            <Link href='/signin' >
+              <a className={`${utils.button} ${styles.menuItem}`}>Sign In</a>
+            </Link>
             }
           </div>
         </div>

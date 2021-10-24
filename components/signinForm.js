@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 export default function SignInForm () {
   const { data: session } = useSession()
   const router = useRouter()
-  const { redirect } = router.query
+  const redirect = router.query.redirect || '/'
   return (
     <article>
       {!session &&

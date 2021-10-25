@@ -1,14 +1,14 @@
 import Router, { useRouter } from 'next/router'
 import useApi from '../../../hooks/useApi'
-import React, { useEffect } from 'react'
-import useUser from '../../../hooks/useUser'
+import { AuthContext } from '../../../hooks/useAuth'
+import { useContext, useEffect } from 'react'
 
 export default function TeamRegistration () {
   const router = useRouter()
   const { tid } = router.query
-
-  const [user] = useUser()
-  const { data, loading, refetch } = useApi(`/api/teams/${tid}/register`)
+  // eslint-disable-next-line no-unused-vars
+  const [session, waiting, user] = useContext(AuthContext)
+  const [data, loading, refetch] = useApi(`/api/teams/${tid}/register`)
   const submit = () => {
     const update = {
       member: user._id
@@ -27,9 +27,4 @@ export default function TeamRegistration () {
       <button onClick={submit}>Complete Registration</button>
     </>
   )
-}
-
-TeamRegistration.auth = {
-  protected: true,
-  redirect: '/teams/'
 }

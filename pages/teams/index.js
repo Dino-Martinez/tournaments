@@ -3,10 +3,9 @@ import utils from '../../styles/utilities.module.css'
 import ApiResolver from '../../components/ApiResolver'
 import TeamList from '../../components/TeamList'
 import Link from 'next/link'
-import React from 'react'
 
 export default function Teams () {
-  const { data: teams, loading } = useApi('/api/teams', {}, [], true)
+  const [teams, loading] = useApi('/api/teams', {}, [], true)
   return (
     <div>
       <ApiResolver data={teams} loading={loading}>

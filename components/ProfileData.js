@@ -1,9 +1,9 @@
+import { useContext, useEffect } from 'react'
 import useApi from '../hooks/useApi'
 import InputForm from './InputForm'
 import DataList from './DataList'
+import { AuthContext } from '../hooks/useAuth'
 import styles from '../styles/profile.module.css'
-import useUser from '../hooks/useUser'
-import React from 'react'
 
 // This is the shape of our input form for updating a user profile
 const fields = [
@@ -36,22 +36,22 @@ const shape = [...fields,
   }
 ]
 
-export default function ProfileData () {
-  const [user, refresh] = useUser()
-  const { refetch: update } = useApi('/api/users', { method: 'PUT' })
+export default function ProfileData ({ data, refresh }) {
+  const [session] = useContext(AuthContext)
+  const [update, loading, refetch] = useApi('/api/users')
   const onSubmit = (values) => {
-    update(user.email, { body: JSON.stringify(values) })
-    refresh()
+    refetch(session.user.email, { method: 'PUT', body: JSON.stringify(values) })
   }
 
+  useEffect(() => {
+    if (update && !loading) {
+      refresh()
+    }
+  }, [update, loading])
   return (
     <>
-      {user &&
-      <>
-        <DataList data={user} shape={shape} classNames={ { ul: styles.list, li: styles.listItem, p: styles.listText } }/>
-        <InputForm fields={fields} onSubmit={onSubmit}></InputForm>
-      </>
-      }
+      <DataList data={data} shape={shape} classNames={ { ul: styles.list, li: styles.listItem, p: styles.listText } }/>
+      <InputForm fields={fields} onSubmit={onSubmit}></InputForm>
     </>
   )
 }

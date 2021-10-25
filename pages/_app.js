@@ -1,40 +1,20 @@
 import '../styles/globals.css'
 import Layout from '../components/Layout'
-import Authenticator from '../components/Authenticator'
+import AuthProvider from '../hooks/useAuth'
 import Head from 'next/head'
-import { SessionProvider } from 'next-auth/react'
-import React from 'react'
-import PropTypes from 'prop-types'
 
-function MyApp ({
-  Component,
-  pageProps: { session, ...pageProps }
-}) {
+function MyApp ({ Component, pageProps }) {
   return (
-    <SessionProvider session={session}>
+    <AuthProvider>
       <Layout>
         <Head>
           <title>Tournament Site</title>
           <meta name="description" content="A webapp to find tournaments" />
         </Head>
-
-        {Component.auth && Component.auth.protected
-          ? (
-            <Authenticator redirect={Component.auth.redirect}>
-              <Component {...pageProps}/>
-            </Authenticator>
-          )
-          : (
-            <Component {...pageProps}/>
-          )}
+        <Component {...pageProps}/>
       </Layout>
-    </SessionProvider>
+    </AuthProvider>
   )
-}
-
-MyApp.propTypes = {
-  Component: PropTypes.node,
-  pageProps: PropTypes.any
 }
 
 export default MyApp

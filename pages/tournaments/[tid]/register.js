@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import useUser from '../../../hooks/useUser'
 import useApi from '../../../hooks/useApi'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import generateKey from '../../../lib/generateKey'
+
 export default function TournamentRegistration () {
   const router = useRouter()
   const { tid } = router.query

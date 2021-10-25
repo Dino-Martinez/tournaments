@@ -1,4 +1,5 @@
 import ProfileData from '../../components/ProfileData'
+import React from 'react'
 
 export default function Profile () {
   return (

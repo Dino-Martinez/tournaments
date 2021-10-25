@@ -4,6 +4,7 @@ import styles from '../../styles/tournaments.module.css'
 import utils from '../../styles/utilities.module.css'
 import ApiResolver from '../../components/ApiResolver'
 import TournamentList from '../../components/TournamentList'
+import React from 'react'
 
 export default function AllTournaments () {
   const { data: tournaments, loading } = useApi('/api/tournaments', {}, [], true)

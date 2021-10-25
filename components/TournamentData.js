@@ -2,6 +2,8 @@ import Link from 'next/link'
 import generateKey from '../lib/generateKey'
 import utils from '../styles/utilities.module.css'
 import styles from '../styles/form.module.css'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function TournamentData ({ data, tid }) {
   const keys = generateKey()
@@ -26,4 +28,17 @@ export default function TournamentData ({ data, tid }) {
       </Link>
     </>
   )
+}
+
+TournamentData.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    registered: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string
+    }))
+  }),
+
+  tid: PropTypes.string
 }

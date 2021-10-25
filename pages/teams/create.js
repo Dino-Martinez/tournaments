@@ -1,9 +1,8 @@
-import { useEffect, useContext, useState } from 'react'
+import React, { useEffect } from 'react'
 import InputForm from '../../components/InputForm'
 import useApi from '../../hooks/useApi'
-import Authenticator from '../../components/Authenticator'
 import Router from 'next/router'
-import { AuthContext } from '../../hooks/useAuth'
+import useUser from '../../hooks/useUser'
 
 const fields = [
   {
@@ -18,14 +17,11 @@ const fields = [
   // }
 ]
 export default function CreateTeam () {
-  const [data, loading, refetch] = useApi('/api/teams')
-  // eslint-disable-next-line no-unused-vars
-  const [session, waiting, user] = useContext(AuthContext)
-  const [authenticated, setAuthenticatedStatus] = useState(false)
+  const { data, loading, refetch } = useApi('/api/teams')
+  const [user] = useUser()
 
   const onSubmit = (values) => {
-    console.log(values)
-    values.author = session.user.email
+    values.author = user.email
     values.owner = values.author
     values.members = [user._id]
     refetch('', { method: 'POST', body: JSON.stringify(values) })
@@ -39,13 +35,12 @@ export default function CreateTeam () {
 
   return (
     <>
-      <Authenticator setReady={setAuthenticatedStatus}/>
-      {authenticated &&
-      <>
-        <h1>Create a team:</h1>
-        <InputForm fields={fields} onSubmit={onSubmit} />
-      </>
-      }
+      <h1>Create a team:</h1>
+      <InputForm fields={fields} onSubmit={onSubmit} />
     </>
   )
+}
+
+CreateTeam.auth = {
+  protected: true
 }

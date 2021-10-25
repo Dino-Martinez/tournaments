@@ -1,9 +1,8 @@
-import { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputForm from '../../components/InputForm'
 import useApi from '../../hooks/useApi'
-import Authenticator from '../../components/Authenticator'
 import Router from 'next/router'
-import { AuthContext } from '../../hooks/useAuth'
+import useUser from '../../hooks/useUser'
 
 const minLength = (value) => {
   return value.length < 5
@@ -47,11 +46,9 @@ const defaults = [
 ]
 
 export default function CreateTournament () {
-  const [data, loading, refetch] = useApi('/api/tournaments')
-  const [games, loadingGames] = useApi('/api/games', {}, [], true)
-  // eslint-disable-next-line no-unused-vars
-  const [session, waiting, user] = useContext(AuthContext)
-  const [authenticated, setAuthenticatedStatus] = useState(false)
+  const { data, loading, refetch } = useApi('/api/tournaments')
+  const { data: games, loading: loadingGames } = useApi('/api/games', {}, [], true)
+  const [user] = useUser()
   const [fields, addField] = useState(defaults)
 
   const onSubmit = (values) => {
@@ -90,13 +87,12 @@ export default function CreateTournament () {
 
   return (
     <>
-      <Authenticator setReady={setAuthenticatedStatus}/>
-      {authenticated &&
-      <>
-        <h1>Create a tournament:</h1>
-        <InputForm fields={fields} onSubmit={onSubmit} />
-      </>
-      }
+      <h1>Create a tournament:</h1>
+      <InputForm fields={fields} onSubmit={onSubmit} />
     </>
   )
+}
+
+CreateTournament.auth = {
+  protected: true
 }

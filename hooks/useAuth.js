@@ -1,15 +1,19 @@
-import { createContext, useEffect } from 'react'
-import { useSession } from 'next-auth/client'
+import React, { createContext, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import useApi from './useApi'
+import PropTypes from 'prop-types'
 
 export const AuthContext = createContext()
 
 export default function AuthProvider ({ children }) {
-  const [session, loading] = useSession()
-  // eslint-disable-next-line no-unused-vars
-  const [user, loadingUser, fetchUser] = useApi('/api/users')
+  const [session, waiting] = useSession()
+  const { data: user, refetch: fetchUser } = useApi('/api/users')
   useEffect(() => {
-    if (session && !loading) fetchUser(session.user.email)
-  }, [session, loading])
-  return <AuthContext.Provider value={[session, loading, user]}>{children}</AuthContext.Provider>
+    if (session && !waiting) fetchUser(session.user.email)
+  }, [session, waiting])
+  return <AuthContext.Provider value={{ session, waiting, user }}>{children}</AuthContext.Provider>
+}
+
+AuthProvider.propTypes = {
+  children: PropTypes.node
 }

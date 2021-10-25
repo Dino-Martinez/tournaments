@@ -1,16 +1,17 @@
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
+import useUser from '../../../hooks/useUser'
 import useApi from '../../../hooks/useApi'
-import { AuthContext } from '../../../hooks/useAuth'
-import { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import generateKey from '../../../lib/generateKey'
 
 export default function TournamentRegistration () {
-  const keys = generateKey()
   const router = useRouter()
   const { tid } = router.query
-  const [session] = useContext(AuthContext)
-  const [data, loading, refetch] = useApi(`/api/tournaments/${tid}/register`)
-  const [teams, loadingTeams, fetchTeams] = useApi('/api/teams/')
+
+  const keys = generateKey()
+  const [user] = useUser()
+  const { data, loading, refetch } = useApi(`/api/tournaments/${tid}/register`)
+  const { data: teams, loading: loadingTeams, refetch: fetchTeams } = useApi('/api/teams/')
   const [selected, setSelected] = useState()
 
   const submit = () => {
@@ -25,17 +26,18 @@ export default function TournamentRegistration () {
 
   useEffect(() => {
     if (!loading && data) {
-      Router.push(`/tournaments/${tid}`)
+      router.push(`/tournaments/${tid}`)
     }
   }, [loading])
 
   useEffect(() => {
-    fetchTeams('', { method: 'POST', body: JSON.stringify({ query: { owner: session.user.email } }) })
-  }, [session])
+    if (user) { fetchTeams('', { method: 'POST', body: JSON.stringify({ query: { owner: user.email } }) }) }
+  }, [user])
 
   useEffect(() => {
     if (!loadingTeams && teams) {
-      setSelected(teams[0]._id)
+      const id = teams[0] ? teams[0]._id : 'No teams'
+      setSelected(id)
     }
   }, [teams, loadingTeams])
 
@@ -52,4 +54,9 @@ export default function TournamentRegistration () {
       }
     </>
   )
+}
+
+TournamentRegistration.auth = {
+  protected: true,
+  redirect: '/tournaments'
 }

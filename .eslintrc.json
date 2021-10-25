@@ -6,7 +6,8 @@
     },
     "extends": [
         "standard",
-        "plugin:@next/next/recommended"
+        "plugin:@next/next/recommended",
+        "plugin:react/recommended"
     ],
     "plugins": [
       "react"

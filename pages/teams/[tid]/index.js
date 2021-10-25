@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import ApiResolver from '../../../components/ApiResolver'
 import useApi from '../../../hooks/useApi'
 import TeamData from '../../../components/TeamData'
+import React from 'react'
 
 export async function getServerSideProps (context) {
   return {

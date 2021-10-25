@@ -1,10 +1,9 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import useObject from '../hooks/useObject'
 import generateKey from '../lib/generateKey'
 import styles from '../styles/form.module.css'
 import utils from '../styles/utilities.module.css'
 import PropTypes from 'prop-types'
-
 /**
  * This component will dynamically render an input form based on the fields provided and will execute the provided callback upon form submission.
  * Validation will be handled for any field with a provided validator function.
@@ -96,5 +95,15 @@ InputForm.propTypes = {
   })).isRequired,
 
   /** A callback function to be executed on form submission */
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+
+  /** Class name overrides to style the list with custom css */
+  classNames: PropTypes.shape({
+    form: PropTypes.string,
+    fieldset: PropTypes.string,
+    label: PropTypes.string,
+    input: PropTypes.string,
+    error: PropTypes.string,
+    throw: PropTypes.string
+  })
 }

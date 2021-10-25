@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import Authenticator from '../components/Authenticator'
 import Head from 'next/head'
 import { SessionProvider } from 'next-auth/react'
+import React from 'react'
 
 function MyApp ({
   Component,

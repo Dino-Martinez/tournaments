@@ -1,8 +1,7 @@
 import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-
 /**
  * This component will conditionally render its children based on user authentication status.
  * If the user is authenticated, the children will be rendered.

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * This component will take reactive state props and conditionally render its children when that state has resolved

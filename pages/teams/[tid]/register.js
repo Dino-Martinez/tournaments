@@ -1,6 +1,6 @@
 import Router, { useRouter } from 'next/router'
 import useApi from '../../../hooks/useApi'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import useUser from '../../../hooks/useUser'
 
 export default function TeamRegistration () {

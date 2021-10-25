@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import styles from '../styles/nav.module.css'
 import utils from '../styles/utilities.module.css'
+import PropTypes from 'prop-types'
 
 const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -80,4 +81,8 @@ export default function Layout ({ children }) {
       </footer>
     </>
   )
+}
+
+Layout.propTypes = {
+  children: PropTypes.node
 }

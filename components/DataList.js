@@ -1,5 +1,6 @@
 import generateKey from '../lib/generateKey'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * This function will dynamically render a list of data based on the provided shape.

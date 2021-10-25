@@ -1,0 +1,41 @@
+.back {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: translateX(-12px) rotate(135deg);
+  -webkit-transform: translateX(-12px) rotate(135deg);
+}
+.button {
+  border: none;
+  background: none;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button:hover > .back {
+  animation: yo .2s 2;
+}
+
+@keyframes yo {
+  0% {
+    transform: translateX(-12px) rotate(135deg);
+    -webkit-transform: translateX(-12px) rotate(135deg);
+  }
+  25% {
+    transform: translateX(-12px) rotate(125deg);
+    -webkit-transform: translateX(-12px) rotate(125deg);
+  }
+  50% {
+    transform: translateX(-12px) rotate(135deg);
+    -webkit-transform: translateX(-12px) rotate(135deg);
+  }
+  75% {
+    transform: translateX(-12px) rotate(145deg);
+    -webkit-transform: translateX(-12px) rotate(145deg);
+  }
+  100% {
+    transform: translateX(-12px) rotate(135deg);
+    -webkit-transform: translateX(-12px) rotate(135deg);
+  }
+}

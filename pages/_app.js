@@ -4,6 +4,7 @@ import Authenticator from '../components/Authenticator'
 import Head from 'next/head'
 import { SessionProvider } from 'next-auth/react'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function MyApp ({
   Component,
@@ -29,6 +30,11 @@ function MyApp ({
       </Layout>
     </SessionProvider>
   )
+}
+
+MyApp.propTypes = {
+  Component: PropTypes.node,
+  pageProps: PropTypes.any
 }
 
 export default MyApp

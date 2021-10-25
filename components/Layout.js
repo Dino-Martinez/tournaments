@@ -1,10 +1,9 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import styles from '../styles/nav.module.css'
 import utils from '../styles/utilities.module.css'
-import PropTypes from 'prop-types'
 import BackButton from './BackButton'
 
 const shimmer = (w, h) => `
@@ -83,8 +82,4 @@ export default function Layout ({ children }) {
       </footer>
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node
 }

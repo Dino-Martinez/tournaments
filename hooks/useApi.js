@@ -7,15 +7,6 @@ const DEFAULT_OPTIONS = {
   method: 'GET'
 }
 
-/**
- * This hook provides a clean interface for api fetching
- * @param {string} url - url
- * @param {object} options - options
- * @param {Array} dependencies - dependencies
- * @param {bool} runOnMount - runOnMount
- * @returns {object}
- */
-
 export default function useApi (url, options = {}, dependencies = [], runOnMount = false) {
   const [data, setData] = useState()
   const [loading, setLoading] = useState(false)

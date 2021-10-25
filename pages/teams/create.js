@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import InputForm from '../../components/InputForm'
 import useApi from '../../hooks/useApi'
 import Router from 'next/router'

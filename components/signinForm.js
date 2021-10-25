@@ -1,6 +1,5 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import React from 'react'
 
 export default function SignInForm () {
   const { data: session } = useSession()

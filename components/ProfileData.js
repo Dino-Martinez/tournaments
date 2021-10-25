@@ -3,7 +3,6 @@ import InputForm from './InputForm'
 import DataList from './DataList'
 import styles from '../styles/profile.module.css'
 import useUser from '../hooks/useUser'
-import React from 'react'
 
 // This is the shape of our input form for updating a user profile
 const fields = [

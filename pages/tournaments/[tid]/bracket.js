@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import ApiResolver from '../../../components/ApiResolver'
 import useApi from '../../../hooks/useApi'
 import { Bracket } from 'react-brackets'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export async function getServerSideProps (context) {
   return {

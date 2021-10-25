@@ -2,8 +2,6 @@ import generateKey from '../lib/generateKey'
 import utils from '../styles/utilities.module.css'
 import styles from '../styles/tournaments.module.css'
 import Link from 'next/link'
-import React from 'react'
-import PropTypes from 'prop-types'
 
 export default function TournamentList ({ data }) {
   const keys = generateKey()
@@ -22,12 +20,4 @@ export default function TournamentList ({ data }) {
       }
     </ul>
   )
-}
-
-TournamentList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    date: PropTypes.date
-  }))
 }

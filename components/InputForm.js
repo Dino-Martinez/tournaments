@@ -3,7 +3,29 @@ import useObject from '../hooks/useObject'
 import generateKey from '../lib/generateKey'
 import styles from '../styles/form.module.css'
 import utils from '../styles/utilities.module.css'
+import PropTypes from 'prop-types'
 
+/**
+ * This component will dynamically render an input form based on the fields provided and will execute the provided callback upon form submission.
+ * Validation will be handled for any field with a provided validator function.
+ *
+ * Example usage:
+ * ```jsx
+ *const fields = [
+ *  {
+ *    key: 'name',
+ *    type: 'text',
+ *    label: 'Enter your name:'
+ *  }
+ *]
+ *
+ *const handleSubmit = (values) => {
+ *  console.log(values)
+ *}
+ *
+ *<InputForm fields={fields} onSubmit={handleSubmit} />
+ * ```
+ */
 export default function InputForm ({ fields, onSubmit, classNames = styles }) {
   const keys = generateKey()
   const [data, setValue] = useObject()
@@ -63,4 +85,16 @@ export default function InputForm ({ fields, onSubmit, classNames = styles }) {
       <input type="submit" value="Submit" className={`${classNames.submit} ${utils.button}`}/>
     </form>
   )
+}
+
+InputForm.propTypes = {
+  /** The shape of our input fields, including any necessary attributes or extensions */
+  fields: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })).isRequired,
+
+  /** A callback function to be executed on form submission */
+  onSubmit: PropTypes.func.isRequired
 }

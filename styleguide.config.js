@@ -1,5 +1,10 @@
 module.exports = {
-  components: ['components/ApiResolver.js'],
+  components: [
+    'components/ApiResolver.js',
+    'components/Authenticator.js',
+    'components/DataList.js',
+    'components/InputForm.js'
+  ],
   webpackConfig: {
     module: {
       rules: [

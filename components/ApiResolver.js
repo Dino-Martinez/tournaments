@@ -4,23 +4,26 @@ import PropTypes from 'prop-types'
  * This component will take reactive state props and conditionally render its children when that state has resolved
  * The most common use case for this component is in conjunction with the useApi hook.
  *
- * @example
+ * Example usage:
  * ```jsx
- * import ApiResolver from './components/ApiResolver'
- * import useApi from './hooks/useApi'
+ *  import ApiResolver from './components/ApiResolver'
+ *  import useApi from './hooks/useApi'
  *
- * // Establish reactive state to be resolved
- * const {data, loading} = useApi('/api-route')
+ *  const ResolvedComponent = (props) => {
+ *    // Establish reactive state to be resolved
+ *    const {data, loading} = useApi('/api-route')
  *
- * // Pass state to resolver, which will conditionally render the child ExampleComponent
- * return (
- *   <ApiResolver data={data} loading={loading} message={"We're loading your data..."}>
- *     <ExampleComponent data={data} />
- *   </ApiResolver>
- * )
+ *    // Pass state to resolver, which will conditionally render the child ExampleComponent
+ *    return (
+ *      <ApiResolver data={data} loading={loading} message={"We're loading your data..."}>
+ *        <ExampleComponent data={data} />
+ *      </ApiResolver>
+ *    )
+ *  }
  * ```
  */
-const ApiResolver = ({ loading, data, children, message = 'Loading info...' }) => {
+
+export default function ApiResolver ({ loading, data, children, message = 'Loading info...' }) {
   return (
     <>
       {loading &&
@@ -47,5 +50,3 @@ ApiResolver.propTypes = {
   /** The message to be displayed while the data is still resolving */
   message: PropTypes.string
 }
-
-export default ApiResolver

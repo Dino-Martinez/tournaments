@@ -3,6 +3,8 @@ import useUser from '../../../hooks/useUser'
 import useApi from '../../../hooks/useApi'
 import React, { useEffect, useState } from 'react'
 import generateKey from '../../../lib/generateKey'
+import ApiResolver from '../../../components/ApiResolver'
+import Register from '../../../components/Register'
 
 export default function TournamentRegistration () {
   const router = useRouter()
@@ -12,7 +14,9 @@ export default function TournamentRegistration () {
   const [user] = useUser()
   const { data, loading, refetch } = useApi(`/api/tournaments/${tid}/register`)
   const { data: teams, loading: loadingTeams, refetch: fetchTeams } = useApi('/api/teams/')
+  const { data: tournament, loading: loadingTournament } = useApi(`/api/tournaments/${tid}`, {}, [], true)
   const [selected, setSelected] = useState()
+  const [teamName, setTeamName] = useState()
 
   const submit = () => {
     if (teams && !loadingTeams) {
@@ -37,19 +41,23 @@ export default function TournamentRegistration () {
   useEffect(() => {
     if (!loadingTeams && teams) {
       const id = teams[0] ? teams[0]._id : 'No teams'
+      const name = teams[0] ? teams[0].name : 'No teams'
       setSelected(id)
+      setTeamName(name)
     }
   }, [teams, loadingTeams])
 
   return (
     <>
-      {!loadingTeams && teams &&
+      {!loadingTeams && teams && user && tournament &&
         <>
-          <p>Registering for {tid}</p>
-          <select onChange={(e) => { setSelected(e.target.value) }}>
+          <select onChange={(e) => { setSelected(e.target.value); setTeamName(e.target.options[e.target.selectedIndex].innerHTML) }}>
             {teams.map(team => <option key={keys.next().value} value={team._id}>{team.name}</option>)}
           </select>
-          <button onClick={submit}>Complete Registration</button>
+          <ApiResolver data={tournament} loading={loadingTournament}>
+            <Register data={ [teamName, tournament.name] } callback={submit} />
+          </ApiResolver>
+          {/* <button onClick={submit}>Complete Registration</button> */}
         </>
       }
     </>

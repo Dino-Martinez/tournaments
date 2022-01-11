@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import useApi from '../hooks/useApi'
 import generateKey from '../lib/generateKey'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function CategoryList () {
   const keys = generateKey()
@@ -17,6 +18,11 @@ export default function CategoryList () {
           {categories.map(category => {
             return (
               <li key={keys.next().value}>
+                <Image
+                  src={category.square}
+                  width='64'
+                  height='64'
+                />
                 <Link
                   href={{
                     pathname: '/tournaments',

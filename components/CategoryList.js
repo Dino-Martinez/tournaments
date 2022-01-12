@@ -3,6 +3,7 @@ import useApi from '../hooks/useApi'
 import generateKey from '../lib/generateKey'
 import Link from 'next/link'
 import Image from 'next/image'
+import styles from '../styles/categorylist.module.css'
 
 export default function CategoryList () {
   const keys = generateKey()
@@ -14,14 +15,15 @@ export default function CategoryList () {
   return (
     <>
       {categories && !loading &&
-        <ul>
+        <ul className={styles.categoryGrid}>
           {categories.map(category => {
             return (
-              <li key={keys.next().value}>
+              <li key={keys.next().value} className={styles.category}>
                 <Image
                   src={category.square}
-                  width='64'
-                  height='64'
+                  width='64px'
+                  height='64px'
+                  className={styles.thumbnail}
                 />
                 <Link
                   href={{

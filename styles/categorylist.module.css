@@ -1,0 +1,11 @@
+.categoryGrid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.category {
+  list-style: none;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+}

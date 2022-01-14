@@ -4,14 +4,20 @@ import connectDB from '../../../lib/db'
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
+    console.log(req.query)
     const query = req.query.category.slice(0, -1)
     const category = await Game
       .findOne({ name: query })
       .lean()
-    const tournaments = await Tournament
-      .find({ game: category._id })
-      .populate('registered')
-      .lean()
+    const tournaments = query !== 'undefined'
+      ? await Tournament
+        .find({ game: category._id })
+        .populate('registered')
+        .lean()
+      : await Tournament
+        .find()
+        .populate('registered')
+        .lean()
 
     return res.status(200).json(tournaments)
   }

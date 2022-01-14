@@ -1,11 +1,16 @@
 .categoryGrid {
   display: grid;
   grid-template-columns: auto auto auto;
+  max-width: 60vw;
 }
 
 .category {
   list-style: none;
   width: max-content;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.thumbnail {
+  object-fit: contain;
 }
